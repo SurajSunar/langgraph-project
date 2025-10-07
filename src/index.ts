@@ -16,7 +16,7 @@ import { HumanMessage } from '@langchain/core/messages';
           messages: [new HumanMessage(req.body.messages)]
         })
         
-        res.send({result: result.messages});
+        res.send({result: result.messages[result.messages.length - 1].content});
       } catch (error) {
         res.send('Error: ' + error);
       }

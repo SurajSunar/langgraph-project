@@ -2,5 +2,5 @@ POST http://localhost:3000
 Content-Type: application/json
 
 {
-    "messages": "how is the weather today in New Delhi"
+    "messages": "convert 10000 USD to INR"
 }

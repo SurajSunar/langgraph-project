@@ -3,6 +3,7 @@ import { ChatGoogleGenerativeAI } from "@langchain/google-genai";
 import { tool } from "@langchain/core/tools";
 import { z } from "zod";
 import dotenv from 'dotenv';
+import { convertCurrency } from "./tools/currencyTool";
 
 dotenv.config(); // Load environment variables from .env
 
@@ -15,5 +16,5 @@ const llm = new ChatGoogleGenerativeAI({
 
 export const agent = createReactAgent({
   llm: llm,
-  tools: [],
+  tools: [convertCurrency],
 });
