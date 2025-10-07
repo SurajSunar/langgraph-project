@@ -2,5 +2,5 @@ POST http://localhost:3000
 Content-Type: application/json
 
 {
-    "messages": "convert 10000 USD to INR"
+    "messages": "get all users  having savings above 3500 in json"
 }
