@@ -1,10 +1,11 @@
-import { StateGraph } from "@langchain/langgraph";
+import { END, StateGraph } from "@langchain/langgraph";
 import { number, string } from "zod";
 
 // Define the state of the graph
 const graphState = {
-  value: number, // Accumulates a value
-  history: string, // Keeps a history of operations
+  value: "", // Accumulates a value
+  history: [], // Keeps a history of operations
+  nextNode: "",
 };
 
 // Define the nodes (functions) of the graph
@@ -24,13 +25,42 @@ const doubleNode = (state: any) => {
   };
 };
 
+const tripleNode = (state: any) => {
+  const newValue = state.value * 3;
+  return {
+    value: newValue,
+    history: [...state.history, `Tripled to ${newValue}`],
+    nextNode: "",
+  };
+};
+
+const checker = (state: any) => {
+  const newValue = state.value;
+  return {
+    ...state,
+    nextNode: newValue < 5 ? "double" : "triple",
+  };
+};
+
+const routeDecision = (state: any) => {
+  return state.nextNode;
+};
+
 // Build the graph
 const workflow = new StateGraph({ channels: graphState } as any)
   .addNode("increment", incrementNode)
+  .addNode("checker", checker)
   .addNode("double", doubleNode)
+  .addNode("triple", tripleNode)
   .setEntryPoint("increment") // Start at the 'increment' node
-  .addEdge("increment", "double") // Transition from 'increment' to 'double'
-  .setFinishPoint("double"); // End at the 'double' node
+  .addEdge("increment", "checker")
+  .addConditionalEdges("checker", routeDecision, {
+    double: "double",
+    triple: "triple",
+  })
+  //.addEdge("increment", "double") // Transition from 'increment' to 'double'
+  .addEdge("double", END)
+  .addEdge("triple", END);
 
 // Compile the graph
 const app = workflow.compile();

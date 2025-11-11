@@ -10,5 +10,5 @@ POST http://localhost:3000/increment
 Content-Type: application/json
 
 {
-    "number": 1
+    "number": 9
 }
