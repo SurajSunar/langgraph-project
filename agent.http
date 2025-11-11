@@ -4,3 +4,11 @@ Content-Type: application/json
 {
     "messages": "get all users  having savings above 3500 in json"
 }
+
+### Langgraph - Test incremental of numbers with nodes and edge
+POST http://localhost:3000/increment
+Content-Type: application/json
+
+{
+    "number": 1
+}

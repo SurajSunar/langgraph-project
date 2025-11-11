@@ -16,7 +16,7 @@
   "bugs": {
     "url": "https://github.com/SurajSunar/langgraph-project/issues"
   },
-  "homepage": "https://github.com/SurajSunar/langgraph-project#readme",
+  "homepage": "https://github.clearcom/SurajSunar/langgraph-project#readme",
   "dependencies": {
     "@langchain/core": "^0.3.78",
     "@langchain/google-genai": "^0.2.18",
