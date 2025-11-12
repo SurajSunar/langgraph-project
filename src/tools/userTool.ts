@@ -1,7 +1,6 @@
 import { tool } from "@langchain/core/tools";
 import { USERS } from "../data/users";
 import { z } from "zod";
-import { log } from "console";
 
 export const getUsersBasedOnType = tool(
   async ({ city, savings, posts }: any) => {
@@ -10,9 +9,8 @@ export const getUsersBasedOnType = tool(
 
     try {
       if (city) {
-        results = (results.length ? results : USERS).filter(
-          (user: any) =>
-            (user.city || "").toLowerCase().includes(city.toLowerCase())
+        results = (results.length ? results : USERS).filter((user: any) =>
+          (user.city || "").toLowerCase().includes(city.toLowerCase())
         );
       }
 

@@ -4,7 +4,7 @@ import { agent } from "./agent";
 import { HumanMessage } from "@langchain/core/messages";
 import { start } from "./agent/increment-double";
 import { ollamaChat } from "./agent/ollama-chat";
-import { weatherLlm } from "./agent/weather-ollama";
+import { weatherLlm, weatherLlmAgent } from "./agent/weather-ollama";
 
 const app: Application = express();
 const PORT: number = 3000;
@@ -55,6 +55,19 @@ app.post("/weather", async (req: Request, res: Response) => {
   try {
     const { query } = req.body;
     const result = await weatherLlm(query);
+
+    res.send({ result });
+  } catch (error) {
+    res.send("Error: " + error);
+  }
+});
+
+app.post("/weather/agent", async (req: Request, res: Response) => {
+  console.log(req.body);
+  const { query } = req.body;
+  try {
+    const { query } = req.body;
+    const result = await weatherLlmAgent(query);
 
     res.send({ result });
   } catch (error) {

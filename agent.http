@@ -31,3 +31,14 @@ Content-Type: application/json
 {
     "query": "How is Thimphu looking like?"
 }
+
+### Langgraph - ollama with langchain for latest weather upate using agent
+POST http://localhost:3000/weather/agent
+Content-Type: application/json
+
+{
+    
+   // "query": "tell me about Indian flag"
+    //"query": "who is Hitler and tell me how WWII started"
+   "query": "I wanted to visit Delhi tomorrow. how is it"
+}

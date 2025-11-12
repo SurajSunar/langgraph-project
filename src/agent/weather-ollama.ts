@@ -1,11 +1,22 @@
-import { ChatOllama } from "@langchain/ollama";
 import { weatherTool } from "../tools/weatherTool";
 import { ChatPromptTemplate } from "@langchain/core/prompts";
 import { ChatGoogleGenerativeAI } from "@langchain/google-genai";
+import {
+  createAgentExecutor,
+  createReactAgent,
+} from "@langchain/langgraph/prebuilt";
+import { HumanMessage } from "langchain";
+import { ollamaChat } from "./ollama-chat";
+import { ChatOllama } from "@langchain/ollama";
 
 const model = new ChatGoogleGenerativeAI({
   model: "gemini-2.5-flash",
   temperature: 0,
+  maxRetries: 2,
+});
+
+const modelOllama = new ChatOllama({
+  model: "llama3.1:latest",
   maxRetries: 2,
 });
 
@@ -50,4 +61,23 @@ async function weatherLlm(query: string) {
   return response.content;
 }
 
-export { weatherLlm };
+async function weatherLlmAgent(query: string) {
+  const agent = createReactAgent({
+    llm: modelOllama,
+    tools: [weatherTool],
+    prompt: `
+         You are a helpful and knowledgeable AI assistant.
+Answer using your general knowledge and reasoning.
+Do not invent data, but explain what is generally known.
+If something is unclear, ask for clarification instead of refusing.
+        `,
+  });
+
+  const result = await agent.invoke({
+    messages: [new HumanMessage(query)],
+  });
+
+  return result.messages[result.messages.length - 1].content;
+}
+
+export { weatherLlm, weatherLlmAgent };
