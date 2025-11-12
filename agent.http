@@ -19,5 +19,15 @@ POST http://localhost:3000/ollama
 Content-Type: application/json
 
 {
-    "query": "X. When we dissolve sugar in water, it forms a A. Solid- Solid mixture B. Solid- Liquid mixture C. Liquid-Liquid Mixture D. Liquid-Gas Mixture. Answer it"
+    "query": "tell me latest weather of New York"
+}
+
+
+
+### Langgraph - ollama with langchain for latest weather upate
+POST http://localhost:3000/weather
+Content-Type: application/json
+
+{
+    "query": "How is Thimphu looking like?"
 }
