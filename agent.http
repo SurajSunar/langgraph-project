@@ -12,3 +12,12 @@ Content-Type: application/json
 {
     "number": 9
 }
+
+
+### Langgraph - ollama test
+POST http://localhost:3000/ollama
+Content-Type: application/json
+
+{
+    "query": "X. When we dissolve sugar in water, it forms a A. Solid- Solid mixture B. Solid- Liquid mixture C. Liquid-Liquid Mixture D. Liquid-Gas Mixture. Answer it"
+}

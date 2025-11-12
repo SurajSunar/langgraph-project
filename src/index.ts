@@ -3,6 +3,7 @@ import express, { Application, Request, Response } from "express";
 import { agent } from "./agent";
 import { HumanMessage } from "@langchain/core/messages";
 import { start } from "./agent/increment-double";
+import { ollamaChat } from "./agent/ollama-chat";
 
 const app: Application = express();
 const PORT: number = 3000;
@@ -33,6 +34,20 @@ app.post("/increment", async (req: Request, res: Response) => {
     res.send("Error: " + error);
   }
 });
+
+app.post("/ollama", async (req: Request, res: Response) => {
+  console.log(req.body);
+  const { query } = req.body;
+  try {
+    const { query } = req.body;
+    const result = await ollamaChat(query);
+
+    res.send({ result });
+  } catch (error) {
+    res.send("Error: " + error);
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
