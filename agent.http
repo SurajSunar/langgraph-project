@@ -53,5 +53,5 @@ POST http://localhost:3000/rag/query
 Content-Type: application/json
 
 {
-    "query": "what are the certification achieved"
+    "query": "get all certifications found in the document"
 }

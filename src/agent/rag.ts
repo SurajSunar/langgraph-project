@@ -3,7 +3,7 @@ import { createReactAgent } from "@langchain/langgraph/prebuilt";
 import { HumanMessage } from "langchain";
 import { ChatOllama } from "@langchain/ollama";
 
-const model = new ChatGoogleGenerativeAI({
+const modelGemini = new ChatGoogleGenerativeAI({
   model: "gemini-2.5-flash",
   temperature: 0,
   maxRetries: 2,
@@ -16,7 +16,7 @@ const modelOllama = new ChatOllama({
 
 async function ragAgent(context: string, query: string) {
   const agent = createReactAgent({
-    llm: modelOllama,
+    llm: modelGemini,
     tools: [],
     prompt: `
         You are a helpful assistant. Use the following context to answer:

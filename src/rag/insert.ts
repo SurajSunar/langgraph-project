@@ -28,7 +28,7 @@ async function insertVectorStore() {
       );
     }
 
-    console.log(`✅ Loaded ${docs.length} documents into pgvector!`);
+    return { message: `✅ Loaded ${docs.length} documents into pgvector!` };
   } catch (error) {
     throw error;
   }
