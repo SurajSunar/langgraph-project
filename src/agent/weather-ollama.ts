@@ -6,7 +6,6 @@ import {
   createReactAgent,
 } from "@langchain/langgraph/prebuilt";
 import { HumanMessage } from "langchain";
-import { ollamaChat } from "./ollama-chat";
 import { ChatOllama } from "@langchain/ollama";
 
 const model = new ChatGoogleGenerativeAI({

@@ -42,3 +42,16 @@ Content-Type: application/json
     //"query": "who is Hitler and tell me how WWII started"
    "query": "I wanted to visit Delhi tomorrow. how is it"
 }
+
+
+### Langgraph - ollama with langchain for RAG insert to PG vector
+POST http://localhost:3000/rag/insert
+Content-Type: application/json
+
+### Langgraph - ollama with langchain for latest weather upate using agent
+POST http://localhost:3000/rag/query
+Content-Type: application/json
+
+{
+    "query": "what are the certification achieved"
+}

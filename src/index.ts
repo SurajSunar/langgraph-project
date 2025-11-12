@@ -5,6 +5,9 @@ import { HumanMessage } from "@langchain/core/messages";
 import { start } from "./agent/increment-double";
 import { ollamaChat } from "./agent/ollama-chat";
 import { weatherLlm, weatherLlmAgent } from "./agent/weather-ollama";
+import { insertVectorStore } from "./rag/insert";
+import { similaritySearch } from "./rag/query";
+import { ragAgent } from "./agent/rag";
 
 const app: Application = express();
 const PORT: number = 3000;
@@ -68,6 +71,33 @@ app.post("/weather/agent", async (req: Request, res: Response) => {
   try {
     const { query } = req.body;
     const result = await weatherLlmAgent(query);
+
+    res.send({ result });
+  } catch (error) {
+    res.send("Error: " + error);
+  }
+});
+
+app.post("/rag/insert", async (req: Request, res: Response) => {
+  console.log(req.body);
+  try {
+    const result = await insertVectorStore();
+
+    res.send({ result });
+  } catch (error) {
+    res.send("Error: " + error);
+  }
+});
+
+app.post("/rag/query", async (req: Request, res: Response) => {
+  console.log(req.body);
+  try {
+    const { query } = req.body;
+
+    const docs = await similaritySearch(query, 3);
+    const context = docs.join("\n");
+
+    const result = await ragAgent(context, query);
 
     res.send({ result });
   } catch (error) {
