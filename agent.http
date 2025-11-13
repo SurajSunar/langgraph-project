@@ -22,8 +22,6 @@ Content-Type: application/json
     "query": "tell me latest weather of New York"
 }
 
-
-
 ### Langgraph - ollama with langchain for latest weather upate
 POST http://localhost:3000/weather
 Content-Type: application/json
@@ -48,7 +46,7 @@ Content-Type: application/json
 POST http://localhost:3000/rag/insert
 Content-Type: application/json
 
-### Langgraph - ollama with langchain for latest weather upate using agent
+### Langgraph - ollama with langchain for simple rag query
 POST http://localhost:3000/rag/query
 Content-Type: application/json
 
@@ -56,11 +54,21 @@ Content-Type: application/json
     "query": "give me summary of the whole documents"
 }
 
-
-### Langgraph - ollama with langchain for latest weather upate using agent
+### Langgraph - ollama with langchain with iterative rag
 POST http://localhost:3000/rag/iterative
 Content-Type: application/json
 
 {
     "query": "give me summary of the whole documents"
 }
+
+
+### Langgraph - langgraph with simple human in the loop
+POST http://localhost:3000/human-approval
+Content-Type: application/json
+
+
+
+### Langgraph - langgraph with simple human in the loop
+GET http://localhost:3000/graph
+Content-Type: application/json

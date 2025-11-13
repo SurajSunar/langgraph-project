@@ -9,11 +9,15 @@ import { insertVectorStore } from "./rag/insert";
 import { similaritySearch } from "./rag/query";
 import { ragAgent } from "./agent/rag";
 import { iterativeRag } from "./agent/iterative-rag";
+import { humanApproval, humanApprovalGraph } from "./agent/human-approval";
 
 const app: Application = express();
 const PORT: number = 3000;
 
 app.use(express.json());
+
+app.set("view engine", "ejs");
+app.use(express.static("public"));
 
 app.post("/", async (req: Request, res: Response) => {
   console.log(req.body);
@@ -118,6 +122,26 @@ app.post("/rag/iterative", async (req: Request, res: Response) => {
     res.send("Error: " + error);
   }
 });
+
+app.post("/human-approval", async (req: Request, res: Response) => {
+  console.log(req.body);
+  try {
+    const { query } = req.body;
+
+    const result = await humanApproval();
+
+    res.send({ result });
+  } catch (error) {
+    res.send("Error: " + error);
+  }
+});
+
+app.get("/graph", async (req, res) => {
+  const mermaidCode = await humanApprovalGraph.getGraph().drawMermaid();
+  res.render("index", { mermaidCode });
+});
+
+app.set("view engine", "ejs");
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
