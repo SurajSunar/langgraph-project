@@ -8,6 +8,7 @@ import { weatherLlm, weatherLlmAgent } from "./agent/weather-ollama";
 import { insertVectorStore } from "./rag/insert";
 import { similaritySearch } from "./rag/query";
 import { ragAgent } from "./agent/rag";
+import { iterativeRag } from "./agent/iterative-rag";
 
 const app: Application = express();
 const PORT: number = 3000;
@@ -98,6 +99,19 @@ app.post("/rag/query", async (req: Request, res: Response) => {
     const context = docs.join("\n");
 
     const result = await ragAgent(context, query);
+
+    res.send({ result });
+  } catch (error) {
+    res.send("Error: " + error);
+  }
+});
+
+app.post("/rag/iterative", async (req: Request, res: Response) => {
+  console.log(req.body);
+  try {
+    const { query } = req.body;
+
+    const result = await iterativeRag(query);
 
     res.send({ result });
   } catch (error) {

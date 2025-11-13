@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/SurajSunar/langgraph-project#readme",
   "dependencies": {
-    "@langchain/community": "^1.0.2",
+    "@langchain/community": "^0.2.14",
     "@langchain/core": "^0.3.79",
     "@langchain/google-genai": "^0.2.18",
     "@langchain/langgraph": "^0.4.9",

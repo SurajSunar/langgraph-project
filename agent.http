@@ -53,5 +53,14 @@ POST http://localhost:3000/rag/query
 Content-Type: application/json
 
 {
-    "query": "get all certifications found in the document"
+    "query": "give me summary of the whole documents"
+}
+
+
+### Langgraph - ollama with langchain for latest weather upate using agent
+POST http://localhost:3000/rag/iterative
+Content-Type: application/json
+
+{
+    "query": "give me summary of the whole documents"
 }
