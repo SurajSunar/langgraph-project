@@ -96,9 +96,9 @@ async function humanApproval() {
   // To resume, we need to invoke it again with a Command.resume
   console.log("--- Resuming Graph with Approval ---");
   // 'true' will be the value returned by the interrupt() call
-  const result2 = await graph.invoke({ iterations: 3, approved: true }, config);
+  const result2 = await graph.invoke(new Command({ resume: "false" }), config);
   console.log("Graph result 2:", result2);
   return result2;
 }
 
-export { humanApproval, graph as humanApprovalGraph };
+export { humanApproval, graph as HumanApprovalGraph };
